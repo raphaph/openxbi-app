@@ -216,7 +216,7 @@ export function CodeArea() {
     }
 
     function saveComponent(nameString: string) {
-        axios.post('https://uxbi.com.br/api/save-component', {
+        axios.post('https://openxbi-api-v2.vercel.app/api/save-component', {
             username: user.user.uid.substring(0, 22),
             filename: nameString,
             componentContent: code

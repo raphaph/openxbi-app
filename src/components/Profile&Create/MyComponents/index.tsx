@@ -34,7 +34,7 @@ export function MyComponents() {
 
     useEffect(() => {
 
-        axios.get(`https://uxbi.com.br/api/get-all-components/${user.user.uid.substring(0, 22)}`, {
+        axios.get(`https://openxbi-api-v2.vercel.app/api/get-all-components/${user.user.uid.substring(0, 22)}`, {
             headers: {
                 "api-key": `${apiKey}`
             }
@@ -48,7 +48,7 @@ export function MyComponents() {
     }, [deleteMyComponent])
 
     function deleteMyComponent(name: string) {
-        axios.delete(`https://uxbi.com.br/api/delete-component/${user.user.uid.substring(0, 22)}/${name.replace(".html", "")}`, {
+        axios.delete(`https://openxbi-api-v2.vercel.app/api/delete-component/${user.user.uid.substring(0, 22)}/${name.replace(".html", "")}`, {
             headers: {
                 "api-key": `${apiKey}`
             }

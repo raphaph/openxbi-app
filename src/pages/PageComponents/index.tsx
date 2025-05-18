@@ -1,4 +1,4 @@
-import { Code, CodeSimple } from 'phosphor-react'
+import { Code } from 'phosphor-react'
 import { useContext, useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { CookiesModal } from '../../components/CookiesModal'
@@ -48,17 +48,23 @@ export function PageComponents() {
 
   async function FetchFilteredContent(all: string, filter: string) {
     if (all === 'all') {
-      await axios.get('https://uxbi.com.br/api/contents', {
-        headers: {
-          "api-key": `${apiKey}`,
-        },
-      })
-        .then((response) => response.data.contents)
-        // .then((data) => data.sort(() => Math.random() - 0.5)) RANDOMICO
-        .then((final) => setFilteredData(final.sort(compare)))
+      try {
+        await axios.get('https://openxbi-api-v2.vercel.app/api/contents', {
+          headers: {
+            "api-key": `${apiKey}`,
+          },
+        })
+          .then((response) => response.data.contents)
+          // .then((data) => data.sort(() => Math.random() - 0.5)) RANDOMICO
+          .then((final) => setFilteredData(final.sort(compare)))
+      }
+      // tenta novamente no localhost
+      catch (error) {
+        console.log(error)
+      }
 
     } else {
-      await axios.get(`https://uxbi.com.br/api/contents/type/${filter}`, {
+      await axios.get(`https://openxbi-api-v2.vercel.app/api/contents/type/${filter}`, {
         headers: {
           "api-key": `${apiKey}`,
         },
@@ -111,7 +117,7 @@ export function PageComponents() {
           return (
             <main key={content.id}>
               <div>
-                <iframe src={content.path} frameBorder={0} height={370} width={380}></iframe>
+                <iframe src={content.path} frameBorder={0} height={370} width={380} title={content.name}></iframe>
               </div>
               <FooterCardContent variant={themeValue}>
                 <strong>

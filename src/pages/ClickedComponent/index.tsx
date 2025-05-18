@@ -33,7 +33,7 @@ export function ClickedComponent() {
     if (user === null) {
       alert('Acesse sua conta para poder curtir! 😁')
     } else {
-      fetch(`https://uxbi.com.br/api/contents/${id}`, {
+      fetch(`https://openxbi-api-v2.vercel.app/api/contents/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export function ClickedComponent() {
   }
 
   async function FetchComponent() {
-    await axios.get(`https://uxbi.com.br/api/contents/search/${clickedName}`, {
+    await axios.get(`https://openxbi-api-v2.vercel.app/api/contents/search/${clickedName}`, {
       headers: {
         'api-key': `${apiKey}`,
       },
